@@ -9,11 +9,11 @@ const config = {
     jwtSecret: process.env.JWT_SECRET || 'supersecret',
     encryptionKey: process.env.ENCRYPTION_KEY,
     nodeEnv: process.env.NODE_ENV || 'development',
-    // google: {
-    //    clientId: process.env.GOOGLE_CLIENT_ID,
-    //    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    //    redirectUri: process.env.GOOGLE_REDIRECT_URI || `http://localhost:${process.env.PORT || 8080}/api/auth/google/callback`
-    // }
+    google: {
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        redirectUri: process.env.GOOGLE_REDIRECT_URI || `http://localhost:${process.env.PORT || 8080}/api/auth/google/callback`
+    }
 };
 
 if (!config.mongoURI) {

@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 
-const algorithm = 'aes-256-cbc';
+const algorithm = 'aes-256-gcm';
 const ivLength = 12;
 const authTagLength = 16;
 
