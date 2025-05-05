@@ -17,9 +17,24 @@ const authMiddleware = async (req: Request, res: Response, next: NextFunction) =
             token = req.headers.authorization.split(' ')[1];
 
             // TODO: add real jwt secret for production
-            const decoded: any = jwt.verify(token, config.jwtSecret);
-
-            // TODO: add real user id
+            let decoded: any;
+            try {
+                decoded = jwt.verify(token, config.jwtSecret);
+            } catch (error) {
+                console.error('!!! AUTH ERROR:', error);
+                return res.status(401).json({ message: 'Unauthorized' });
+            }
+            
+            try {
+                const user = await User.findById(decoded.userId);
+                if (!user) {
+                    return res.status(401).json({ message: 'Unauthorized' });
+                }
+                req.user = user;
+            } catch (error) {
+                console.error('!!! AUTH ERROR:', error);
+                return res.status(401).json({ message: 'Unauthorized' });
+            }
 
             next();
         } catch (error) {
