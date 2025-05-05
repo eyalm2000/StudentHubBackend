@@ -20,7 +20,10 @@ export const redirectToGoogle = async (req: Request, res: Response, next: NextFu
                 'https://www.googleapis.com/auth/userinfo.email',
                 'https://www.googleapis.com/auth/classroom.courses.readonly',
                 'https://www.googleapis.com/auth/classroom.coursework.me.readonly',
-                'https://www.googleapis.com/auth/classroom.student-submissions.me.readonly'
+                'https://www.googleapis.com/auth/classroom.student-submissions.me.readonly',
+                'https://www.googleapis.com/auth/classroom.profile.photos',
+                'https://www.googleapis.com/auth/classroom.announcements.readonly'
+
             ],
             prompt: 'consent'
         });
