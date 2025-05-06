@@ -1,21 +1,24 @@
 import mongoose, { Schema, Document, Types } from 'mongoose';
 import { IClass } from './Class';
+import { ISubject } from './Subject';
+import { ITeacher } from './Teacher';
 
 export interface ITask extends Document {
+    _id: Types.ObjectId;
     targetClass: Types.ObjectId;
     title: string;
     description?: string;
-    type: 'assignment' | 'homework' | 'other';
-    coverImage?: string;
+    type: 'assignment' | 'homework' | 'other'; // no exams here, it's from the school
+    coverImageUrl?: string;
     attachmentsUrls?: string[];
     dueDate?: {
         date: Date;
         lessonNumber: number;
     };
     // isDone: boolean; it should be per-user
-    // subject: 
-    // teacher: 
-    source: 'classroom' | 'ofek' | 'user';
+    subject: Types.ObjectId;
+    teacher: Types.ObjectId;
+    source: 'classroom' | 'ofek' | 'fullproof' | 'webtop' | 'user' | 'unknown';
     creator?: Types.ObjectId;
     createdAt: Date;
     updatedAt: Date;
@@ -37,7 +40,12 @@ const TaskSchema = new Schema({
         type: String,
         default: ''
     },
-    coverImage: {
+    type: {
+        type: String,
+        enum: ['assignment', 'homework', 'other'],
+        required: true, 
+    },
+    coverImageUrl: {
         type: String,
         default: ''
     },
@@ -53,9 +61,19 @@ const TaskSchema = new Schema({
             type: Number,
         }
     },
+    subject: {
+        type: Types.ObjectId,
+        ref: 'Subject',
+        index: true,
+    },
+    teacher: {
+        type: Types.ObjectId,
+        ref: 'Teacher',
+        index: true,
+    },
     source: {
         type: String,
-        enum: ['classroom', 'ofek', 'user'],
+        enum: ['classroom', 'ofek', 'fullproof', 'webtop', 'user', 'unknown'],
         required: true
     },
     creator: {
