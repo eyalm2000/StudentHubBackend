@@ -18,8 +18,6 @@ const TeacherSchema = new Schema({
     subjects: {
         type: [Types.ObjectId],
         ref: 'Subject',
-        required: true,
-        index: true,
     },
     email: {
         type: String,
@@ -28,5 +26,3 @@ const TeacherSchema = new Schema({
 }, { timestamps: true });
 
 export default mongoose.model<ITeacher>('Teacher', TeacherSchema);
-
-

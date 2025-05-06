@@ -1,12 +1,14 @@
 import mongoose, { Schema, Document, Types } from 'mongoose';
 import { IUser } from './User';
+import { ITeacher } from './Teacher';
 
 export interface IClass extends Document {
     _id: Types.ObjectId;
     name: string;
     type: 'main' | 'course';
     googleCoursesIds: string[];
-    members: Types.ObjectId[] | IUser[];
+    teachers: Types.ObjectId[];
+    members: Types.ObjectId[];
     // school: 
     createdAt: Date;
     updatedAt: Date;

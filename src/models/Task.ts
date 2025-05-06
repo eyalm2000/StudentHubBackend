@@ -56,6 +56,7 @@ const TaskSchema = new Schema({
     dueDate: {
         date: {
             type: Date,
+            required: true,
         },
         lessonNumber: {
             type: Number,
