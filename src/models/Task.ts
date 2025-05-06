@@ -54,13 +54,18 @@ const TaskSchema = new Schema({
         default: []
     },
     dueDate: {
-        date: {
-            type: Date,
-            required: true,
+        type: {
+            date: {
+                type: Date,
+                required: true,
+            },
+            lessonNumber: {
+                type: Number,
+                required: false,
+            }
         },
-        lessonNumber: {
-            type: Number,
-        }
+        required: false,
+        _id: false,
     },
     subject: {
         type: Types.ObjectId,

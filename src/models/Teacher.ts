@@ -4,7 +4,7 @@ export interface ITeacher extends Document {
     _id: Types.ObjectId;
     name: string;
     subjects: Types.ObjectId[];
-    email?: string;
+    email?: string; // all emails from classroom users
     createdAt: Date;
     updatedAt: Date;
 }
@@ -22,6 +22,8 @@ const TeacherSchema = new Schema({
     email: {
         type: String,
         required: false,
+        trim: true,
+        unique: true,
     }
 }, { timestamps: true });
 
