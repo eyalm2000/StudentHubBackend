@@ -1,0 +1,36 @@
+import mongoose, { Schema, Document, Types } from 'mongoose';
+
+export interface IUserTaskState extends Document {
+    _id: Types.ObjectId;
+    userId: Types.ObjectId;
+    taskId: Types.ObjectId;
+    isDone: boolean;
+    completedAt?: Date;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+const UserTaskStateSchema = new Schema({
+    userId: {
+        type: Types.ObjectId,
+        ref: 'User',
+        index: true,
+        required: true
+    }, 
+    taskId: {
+        type: Types.ObjectId,
+        required: true
+    },
+    isDone: {
+        type: Boolean,
+        default: false
+    },
+    completedAt: {
+        type: Date,
+        required: false
+    }
+}, {
+    timestamps: true
+});
+
+export const UserTaskState = mongoose.model<IUserTaskState>('UserTaskState', UserTaskStateSchema);
