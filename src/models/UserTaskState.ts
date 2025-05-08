@@ -19,6 +19,7 @@ const UserTaskStateSchema = new Schema({
     }, 
     taskId: {
         type: Types.ObjectId,
+        ref: 'Task',
         required: true
     },
     isDone: {
@@ -32,5 +33,7 @@ const UserTaskStateSchema = new Schema({
 }, {
     timestamps: true
 });
+
+UserTaskStateSchema.index({ userId: 1, taskId: 1 }, { unique: true });
 
 export const UserTaskState = mongoose.model<IUserTaskState>('UserTaskState', UserTaskStateSchema);
